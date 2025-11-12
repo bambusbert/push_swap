@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:25:11 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/11 17:11:45 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:46:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void pa (t_list *list_a, t_list **list_b)
 {
     if (!list_b)
         return;
+    //alles in list a um 1 nach hinten verschieben
     list_a[0] = *list_b[0];
     *list_b += 1;
 }
