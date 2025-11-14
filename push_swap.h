@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 13:31:44 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:16:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,13 @@ void	ss(t_list **list_a, t_list **list_b);
 void	push(t_list **list1, t_list **list2);
 void	pa(t_list **list1, t_list **list2);
 void	pb(t_list **list1, t_list **list2);
+void	rotate(t_list **list);
+void	ra(t_list **list);
+void	rb(t_list **list);
+void	rr(t_list **list_a, t_list **list_b);
+void	reverse_rotate(t_list **list);
+void	rra(t_list **list);
+void	rrb(t_list **list);
+void	rrr(t_list **list_a, t_list **list_b);
 
 #endif

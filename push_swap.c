@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 13:37:41 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:17:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,22 @@ int	main(int argc, char **args)
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
 
-	ft_printf("\n trying pb\n");
-	pb(&stack_a, &stack_b);
+	// ft_printf("\n trying pb\n");
+	// pb(&stack_a, &stack_b);
+	// ft_printf("printing stack A\n");
+	// print_list(stack_a);
+	// ft_printf("\nprinting stack B\n");
+	// print_list(stack_b);
+
+	// ft_printf("\n trying ra\n");
+	// ra(&stack_a);
+	// ft_printf("printing stack A\n");
+	// print_list(stack_a);
+	// ft_printf("\nprinting stack B\n");
+	// print_list(stack_b);
+
+	ft_printf("\n trying rra\n");
+	rra(&stack_a);
 	ft_printf("printing stack A\n");
 	print_list(stack_a);
 	ft_printf("\nprinting stack B\n");

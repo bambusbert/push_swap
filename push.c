@@ -6,13 +6,13 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:05:46 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 13:35:12 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 13:46:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// take the first element of list2 and put it in the beginning of list1
+// take the first element of src and puts it in the beginning of dest
 void	push(t_list **dest, t_list **src)
 {
 	t_list	*node_to_move;
