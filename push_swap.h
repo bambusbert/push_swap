@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 15:25:28 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:14:32 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define PUSH_SWAP
 
 # include "libft/libft.h"
+
+typedef struct s_node
+{
+	int	value;
+	int	index;
+}		t_node;
 
 int		check_input(char **args);
 void	swap(t_list **head);

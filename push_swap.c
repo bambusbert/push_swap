@@ -6,17 +6,18 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 17:15:35 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:20:22 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int		check_input(char **args);
+int		check_single_input(char *str);
 void	init_stack_a(t_list **list, char **args);
 void	init_stack_b_testing(t_list **list);
-void	print_list(t_list *list);	//remove after testing!
-void	print_lists(t_list* list_a, t_list* list_b);
+void	print_list(t_list *list); // remove after testing!
+void	print_lists(t_list *list_a, t_list *list_b);
 
 int	main(int argc, char **args)
 {
@@ -31,7 +32,7 @@ int	main(int argc, char **args)
 	stack_a = NULL;
 	stack_b = NULL;
 	init_stack_a(&stack_a, args);
-	//init_stack_b_testing(&stack_b);
+	// init_stack_b_testing(&stack_b);
 	print_lists(stack_a, stack_b);
 	// sa(&stack_a);
 	// print_list(stack_a);
@@ -41,18 +42,15 @@ int	main(int argc, char **args)
 	// print_list(stack_a);
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
-	
-	//TEST FOR pb
+	// TEST FOR pb
 	pb(&stack_a, &stack_b);
 	print_lists(stack_a, stack_b);
-	
 	// ft_printf("\n trying ra\n");
 	// ra(&stack_a);
 	// ft_printf("printing stack A\n");
 	// print_list(stack_a);
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
-	
 	// ft_printf("\n trying rra\n");
 	// rra(&stack_a);
 	// ft_printf("printing stack A\n");
@@ -62,8 +60,8 @@ int	main(int argc, char **args)
 }
 
 // checks all arguments, returns 0 if there is a character that is not a number
-//TODO -5 is currently an error, that should be fine though
-//TODO if there are any duplicates -> error
+// TODO -5 is currently an error, that should be fine though
+// TODO if there are any duplicates -> error
 int	check_input(char **args)
 {
 	int	i;
@@ -80,9 +78,27 @@ int	check_input(char **args)
 			j++;
 		}
 		i++;
+		// alternative approach:
+		/* 		if (!check_single_input(args[i]))
+					return (0); */
 	}
 	return (1);
 }
+/* 
+int	check_single_input(char *str)
+{
+	int i;
+	int minus;
+
+	i = 0;
+	minus = 0;
+	while(str[i])
+	{
+		if (minus && (str[i] < 48 || str[i] > 57))
+			i++;
+		else if (str[i] < 48 || str[i] > 57)
+	}
+} */
 void	init_stack_a(t_list **list, char **args)
 {
 	size_t	i;
@@ -138,11 +154,11 @@ void	init_stack_b_testing(t_list **list)
 	}
 }
 
-void	print_lists(t_list* list_a, t_list* list_b)
+void	print_lists(t_list *list_a, t_list *list_b)
 {
 	while (list_a || list_b)
 	{
-		//ft_printf("%d %d\n", list_a->content, list_b->content);
+		// ft_printf("%d %d\n", list_a->content, list_b->content);
 		if (list_a)
 			ft_printf("%d", *((int *)list_a->content));
 		else
