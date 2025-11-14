@@ -6,15 +6,15 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/11 17:28:20 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:58:15 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_stack_a(t_list *list, char **args);
-void	init_stack_b(t_list *list);
-void	print_array(t_list *list);
+void	init_stack_a(t_list **list, char **args);
+void	init_stack_b(t_list **list);
+void	print_list(t_list *list);
 
 int	main(int argc, char **args)
 {
@@ -25,82 +25,91 @@ int	main(int argc, char **args)
 	if (argc <= 1 || !args)
 		return (ft_printf("Error\n"), -1);
 	// stack_a = ft_calloc (argc - 1, sizeof(int));
-	stack_a = malloc((argc - 1) * sizeof(t_list));
-	stack_b = malloc((argc - 1) * sizeof(t_list));
-	init_stack_a(stack_a, args);
-	init_stack_b(stack_b);
+	stack_a = NULL;
+	stack_b = NULL;
+	init_stack_a(&stack_a, args);
+	init_stack_b(&stack_b);
 	ft_printf("printing stack A\n");
-	print_array(stack_a);
+	print_list(stack_a);
 	ft_printf("\nprinting stack B\n");
-	print_array(stack_b);
-    ft_printf("\nsa\n");
-	sa(stack_a);
-	print_array(stack_a);
-    ft_printf("\npa\n");
-	pa(stack_a, &stack_b);
-    ft_printf("printing stack A\n");
-	print_array(stack_a);
-    ft_printf("\nprinting stack B\n");
-	print_array(stack_b);
+	print_list(stack_b);
+
+	sa(&stack_a);
+	print_list(stack_a);
+	
+	// ft_printf("\npa\n");
+	// pa(stack_a, &stack_b);
+	// ft_printf("printing stack A\n");
+	// print_list(stack_a);
+	// ft_printf("\nprinting stack B\n");
+	// print_list(stack_b);
 }
 
-void	init_stack_a(t_list *list, char **args)
+void	init_stack_a(t_list **list, char **args)
 {
 	size_t	i;
-	size_t	j;
+	t_list	*new;
+	int		*num_content;
 
-	j = 0;
-	while (args[j])
-		j++;
-	j--;
-	printf("no of arguments: %zu\n", j);
-	i = 0;
-	while (i < j)
+	i = 1;
+	while (args[i])
 	{
-		list[i].value = atoi(args[i + 1]);
-		if (i < j - 1)
-			list[i].next = &list[i + 1];
-		else
-			list[i].next = NULL;
+		new = malloc(sizeof(t_list));
+		if (!new)
+			return ;
+		num_content = malloc(sizeof(int));
+		if (!num_content)
+		{
+			free(new);
+			return ;
+		}
+		*num_content = atoi(args[i]);
+		new->content = num_content;
+		new->next = NULL;
+		ft_lstadd_back(list, new);
 		i++;
 	}
 }
 
 // this is for testing, remove later
-void	init_stack_b(t_list *list)
+void	init_stack_b(t_list **list)
 {
-	int	i;
-	int	j;
-
+	size_t i;
+	size_t j;
+	t_list*new;
+	int *num_content;
+	
 	i = 0;
 	j = 5;
 	while (i < j)
 	{
-		list[i].value = i;
-		if (i < j - 1)
-			list[i].next = &list[i + 1];
-		else
-			list[i].next = NULL;
+		new = malloc (sizeof(t_list));
+		if (!new)
+			return ;
+		num_content = malloc (sizeof(int));
+		if (!num_content)
+		{
+			free(new);
+			return ;
+		}
+		*num_content = i;
+		new->content = num_content;
+		new->next = NULL;
+		ft_lstadd_back(list, new);
 		i++;
 	}
 }
 
-void	print_array(t_list *list)
+void	print_list(t_list *list)
 {
 	size_t i;
 
 	i = 0;
-	// if (list[0].value && !list[i].next)
-	// {
-	//     ft_printf("Value of Element %d: %d\n", i, list[i].value);
-	//     ft_printf("Pointer of Element %d: %p\n", i, list[i].next);
-	// }
-	while (list[i].next)
+	while (list)
 	{
-		ft_printf("Value of Element %d: %d\n", i, list[i].value);
-		ft_printf("Pointer of Element %d: %p\n", i, list[i].next);
+		ft_printf("Value of Element %d: %d\n", i, *((int *)list->content));
+		ft_printf("Pointer of Next Element %d: %p\n", i, list->next);
+		list = list->next;
 		i++;
 	}
-	ft_printf("Value of Element %d: %d\n", i, list[i].value);
-	ft_printf("Pointer of Element %d: %p\n", i, list[i].next);
 }
