@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 14:16:50 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:25:28 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 
 # include "libft/libft.h"
 
-// weg damit weil eh in der libft header
-// typedef struct s_list{
-//     int value;
-//     struct s_list* next;
-// } t_list;
-
+int		check_input(char **args);
 void	swap(t_list **head);
 void	sa(t_list **list);
 void	sb(t_list **list);
