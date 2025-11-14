@@ -6,13 +6,13 @@
 #    By: slambert <slambert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 13:28:23 by slambert          #+#    #+#              #
-#    Updated: 2025/11/14 12:54:50 by slambert         ###   ########.fr        #
+#    Updated: 2025/11/14 13:06:49 by slambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRC = push_swap.c swap.c libft/libft.a\
+SRC = push_swap.c swap.c push.c libft/libft.a\
 
 # SRC_BONUS = ...
 

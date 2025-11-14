@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 12:58:15 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 13:37:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,22 @@ int	main(int argc, char **args)
 	ft_printf("\nprinting stack B\n");
 	print_list(stack_b);
 
-	sa(&stack_a);
-	print_list(stack_a);
+	// sa(&stack_a);
+	// print_list(stack_a);
 	
-	// ft_printf("\npa\n");
-	// pa(stack_a, &stack_b);
+	// ft_printf("\n trying pa\n");
+	// pa(&stack_a, &stack_b);
 	// ft_printf("printing stack A\n");
 	// print_list(stack_a);
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
+
+	ft_printf("\n trying pb\n");
+	pb(&stack_a, &stack_b);
+	ft_printf("printing stack A\n");
+	print_list(stack_a);
+	ft_printf("\nprinting stack B\n");
+	print_list(stack_b);
 }
 
 void	init_stack_a(t_list **list, char **args)
