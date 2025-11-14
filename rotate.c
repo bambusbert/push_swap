@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:47:08 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 14:06:49 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:03:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void	rotate(t_list **list)
 void	ra(t_list **list)
 {
     rotate(list);
-	ft_putstr_fd("ra\n", 1);
+	ft_putstr_fd("\nra\n", 1);
 }
 
 void	rb(t_list **list)
 {
     rotate(list);
-	ft_putstr_fd("rb\n", 1);
+	ft_putstr_fd("\nrb\n", 1);
 }
 
 void	rr(t_list **list_a, t_list** list_b)
 {
     rotate(list_a);
     rotate(list_b);
-	ft_putstr_fd("rr\n", 1);
+	ft_putstr_fd("\nrr\n", 1);
 }

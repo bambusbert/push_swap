@@ -6,9 +6,11 @@
 #    By: slambert <slambert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 13:28:23 by slambert          #+#    #+#              #
-#    Updated: 2025/11/14 14:09:02 by slambert         ###   ########.fr        #
+#    Updated: 2025/11/14 16:13:34 by slambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#TODO call makefile from libft from here
 
 NAME = push_swap
 

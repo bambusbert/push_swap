@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:05:46 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/14 15:02:42 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:03:30 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	pa(t_list **list_a, t_list **list_b)
 {
 	if (*list_b)
 		push(list_a, list_b);
-	ft_putstr_fd("pa\n", 1);
+	ft_putstr_fd("\npa\n", 1);
 }
 
 void	pb(t_list **list_a, t_list **list_b)
 {
 	if (*list_a)
 		push(list_b, list_a);
-	ft_putstr_fd("pb\n", 1);
+	ft_putstr_fd("\npb\n", 1);
 }

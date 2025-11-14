@@ -6,9 +6,11 @@
 #    By: slambert <slambert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/03 13:41:02 by slambert          #+#    #+#              #
-#    Updated: 2025/11/12 19:18:30 by slambert         ###   ########.fr        #
+#    Updated: 2025/11/14 16:14:05 by slambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#TODO do nothing when writing make bonus if there is nothing to be done
 
 NAME = libft.a
 
