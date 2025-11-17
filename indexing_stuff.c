@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:54:52 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 13:56:23 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:50:30 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_indices(t_list **list)
 	t_node	**node_array;
 
 	arr_size = count_nodes(*list);
-	printf("The array has %zu elements\n", arr_size);
+	//printf("The array has %zu elements\n", arr_size);
 	node_array = malloc(sizeof(t_node *) * arr_size);
 	// if (!node_array)
 	// error handling
@@ -38,6 +38,7 @@ void	init_indices(t_list **list)
 	}
 	bubble_sort_array(node_array, arr_size);
 	fill_out_indices(node_array, arr_size);
+    free (node_array);
 }
 
 void	bubble_sort_array(t_node **node_array, size_t size)

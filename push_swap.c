@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 15:40:31 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:52:42 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,27 @@ int	main(int argc, char **args)
 	init_stack_a(&stack_a, args);
 	// init_stack_b_testing(&stack_b);
 	print_lists(stack_a, stack_b);
-	// pseudo code og what to do
+	// pseudo code of what to do
 	// 1. create indices for the list starting at 1
 	init_indices(&stack_a);
 	//set variable n (median of the stack)
 	n = count_nodes(stack_a) / 2;
-	ft_printf("printing stacks - INDEX\n");
+	ft_printf("STEP 1 - printing stacks - INDEX\n");
 	print_lists_index(stack_a, stack_b);
 	// 2. split the stack in half with N/2, if num < N -> pb ; else ra
-	// 3. push all elems but 3 to b (pb)
-	ft_printf("STEP 1 - stack splitting\n");
+	ft_printf("\nSTEP 2 - stack splitting\n");
 	split_stacks(&stack_a, &stack_b, n);
+	ft_printf("-------------------------------------------\n");
 	ft_printf("printf after stack splitting\n");
 	print_lists_index(stack_a, stack_b);
+	// 3. push all elems but 3 to b (pb)
+	push_stuff_to_b(&stack_a, &stack_b);
+	ft_printf("printf after push_stuff_to_b\n");
+	print_lists_index(stack_a, stack_b);
 	// 4. sort 3 on a hardcoded
+	sort_three_or_less(&stack_a);
+	ft_printf("printf after swap_three_or_less\n");
+	print_lists_index(stack_a, stack_b);
 	// 5. intelligent push backs from b to a
 	// sa(&stack_a);
 	// print_list(stack_a);
@@ -69,6 +76,45 @@ int	main(int argc, char **args)
 	// print_list(stack_a);
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
+}
+
+void	sort_three_or_less(t_list **stack_a)
+{
+	int top;
+	int mid;
+	int btm;
+
+	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
+		return ;
+	mid = 0;
+	btm = 0;
+	//TODO failguards
+	top = ((t_node*)((*stack_a)->content))->index;
+	if ((*stack_a)->next)
+		mid = ((t_node*)((*stack_a)->next->content))->index;
+	if ((*stack_a)->next->next)
+		btm = ((t_node*)((*stack_a)->next->next->content))->index;
+	if (top > mid && top > btm)
+		ra(stack_a);
+	else if (mid > top && mid > btm)
+		rra(stack_a);
+	top = ((t_node*)((*stack_a)->content))->index;
+	mid = ((t_node*)((*stack_a)->next->content))->index;
+	if (top > mid)
+		sa(stack_a);
+}
+
+//pushes all but 3 elements from a to b
+void push_stuff_to_b(t_list **stack_a, t_list** stack_b)
+{
+	int nodes;
+	
+	nodes = count_nodes(*stack_a);
+	while (nodes > 3)
+	{
+		pb(stack_a, stack_b);
+		nodes--;
+	}
 }
 
 /* this function splits stack a in half. if an element is smaller than N/2 it will be pushed 

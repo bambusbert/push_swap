@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 15:14:51 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:38:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ void	rrr(t_list **list_a, t_list **list_b);
 void	init_indices(t_list **list);
 size_t	count_nodes(t_list *list);
 void	bubble_sort_array(t_node **node_array, size_t size);
-void 	fill_out_indices(t_node **node_array, size_t size);
+void	fill_out_indices(t_node **node_array, size_t size);
 void	init_stack_a(t_list **list, char **args);
 void	init_stack_b_testing(t_list **list);
 void	print_list(t_list *list); // remove after testing!
 void	print_lists(t_list *list_a, t_list *list_b);
 void	print_lists_index(t_list *list_a, t_list *list_b);
-void	split_stacks (t_list** stack_a, t_list **stack_b, int n);
+void	split_stacks(t_list **stack_a, t_list **stack_b, int n);
+void	push_stuff_to_b(t_list **stack_a, t_list **stack_b);
+void	sort_three_or_less(t_list **stack_a);
 
 #endif
