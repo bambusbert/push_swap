@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/push_swap",
-            "args": ["5", "4", "3", "2", "1", "5", "45", "56", "23"],       //fake inputs
+            "args": ["4", "3", "2", "1", "5", "45", "56", "23", "6", "65", "52"],       //fake inputs
             "cwd": "${workspaceFolder}",
             "environment": [],
             "MIMode": "gdb",

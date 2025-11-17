@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 17:55:26 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:02:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,27 +103,30 @@ void find_direction_and_rotate (t_list **stack_b, t_list* elem_biggest_index)
 {
 	size_t length;
 	size_t counter;
-	t_list *head;
+	size_t bottom;
+	
+	t_list *cur;
 	
 	length = count_nodes(*stack_b);
 	counter = 0;
-	head = *stack_b;
-	while (head != elem_biggest_index)
+	cur = *stack_b;
+	while (cur != elem_biggest_index)
 	{
-		head = head->next;
+		cur = cur->next;
 		counter++;
 	}
-	if (counter >= length / 2)
+	bottom = length - counter;
+	if (counter <= bottom)
 	{
-		//a bunch of ra
+		//a bunch of rb
 		//dir = 2
 		rotation_manager(stack_b, counter, 2);
 	}
 	else
 	{
-		//a bunch of rra
+		//a bunch of rrb
 		//dir = 1
-		rotation_manager(stack_b, counter, 1);
+		rotation_manager(stack_b, bottom, 1);
 	}
 }
 
