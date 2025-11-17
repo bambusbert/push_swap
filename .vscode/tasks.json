@@ -5,11 +5,11 @@
             "label": "C/C++: gcc build active file",
             "command": "/usr/bin/gcc",
             "args": [
-                "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "*.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "push_swap",
+                "libft/libft.a"
             ],
             "options": {
                 "cwd": "${fileDirname}"

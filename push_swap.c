@@ -6,28 +6,20 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 13:47:34 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:40:31 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		check_input(char **args);
-int		check_single_input(char *str);
-void	init_stack_a(t_list **list, char **args);
-void	init_stack_b_testing(t_list **list);
-void	print_list(t_list *list); // remove after testing!
-void	print_lists(t_list *list_a, t_list *list_b);
-void	init_indices(t_list **list);
-size_t	count_nodes(t_list *list);
-void	bubble_sort_array(t_node **node_array, size_t size);
-void 	fill_out_indices(t_node **node_array, size_t size);
-void	print_lists_index(t_list *list_a, t_list *list_b);
+//int		check_input(char **args);
+//int		check_single_input(char *str);
 
 int	main(int argc, char **args)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
+	int		n;
 
 	(void)stack_b;
 	if (argc <= 1 || !args)
@@ -42,10 +34,16 @@ int	main(int argc, char **args)
 	// pseudo code og what to do
 	// 1. create indices for the list starting at 1
 	init_indices(&stack_a);
+	//set variable n (median of the stack)
+	n = count_nodes(stack_a) / 2;
 	ft_printf("printing stacks - INDEX\n");
 	print_lists_index(stack_a, stack_b);
 	// 2. split the stack in half with N/2, if num < N -> pb ; else ra
 	// 3. push all elems but 3 to b (pb)
+	ft_printf("STEP 1 - stack splitting\n");
+	split_stacks(&stack_a, &stack_b, n);
+	ft_printf("printf after stack splitting\n");
+	print_lists_index(stack_a, stack_b);
 	// 4. sort 3 on a hardcoded
 	// 5. intelligent push backs from b to a
 	// sa(&stack_a);
@@ -73,80 +71,24 @@ int	main(int argc, char **args)
 	// print_list(stack_b);
 }
 
-// indices starting from 1 bc 0 is the uninitialized value
-void	init_indices(t_list **list)
+/* this function splits stack a in half. if an element is smaller than N/2 it will be pushed 
+to stack_b. otherwise it will be put at the end of stack a (ra)*/
+void split_stacks (t_list** stack_a, t_list **stack_b, int n)
 {
-	size_t	arr_size;
-	size_t	i;
-	t_list	*cur;
-	t_node	**node_array;
-
-	// create a temporary array of node pointers
-	// sort this array by bubble sort
-	// fill out indices
-	arr_size = count_nodes(*list);
-	printf("The array has %zu elements\n", arr_size);
-	node_array = malloc(sizeof(t_node *) * arr_size);
-	// if (!node_array)
-	// error handling
-	i = 0;
-	cur = *list;
-	while (i < arr_size)
+	size_t size_stack_a;
+	size_t count_operations;
+	
+	size_stack_a = count_nodes(*stack_a);
+	count_operations = 0;
+	printf("n is %d\n", n);
+	while (count_operations < size_stack_a)
 	{
-		node_array[i] = (t_node *)cur->content;
-		cur = cur->next;
-		i++;
-	}
-	// bubble sort of node_array
-	bubble_sort_array(node_array, arr_size);
-	fill_out_indices(node_array, arr_size);
-}
-
-void fill_out_indices(t_node **node_array, size_t size)
-{
-	size_t i;
-
-	i = 0;
-	while (i < size)
-	{
-		node_array[i]->index = i + 1;
-		i++;
-	}
-}
-
-void	bubble_sort_array(t_node **node_array, size_t size)
-{
-	size_t		i;
-	t_node	*temp;
-
-	if (size <= 1)
-		return ;
-	i = 0;
-	while (i < size - 1)
-	{
-		if (node_array[i]->value > node_array[i + 1]->value)
-		{
-			temp = node_array[i];
-			node_array[i] = node_array[i + 1];
-			node_array[i + 1] = temp;
-			i = 0;
-		}
+		if (((t_node*)(*stack_a)->content)->index <= n)
+			pb(stack_a, stack_b);
 		else
-			i++;
+			ra(stack_a);		
+		count_operations++;
 	}
-}
-
-size_t	count_nodes(t_list *list)
-{
-	size_t	ret;
-
-	ret = 0;
-	while (list)
-	{
-		ret++;
-		list = list->next;
-	}
-	return (ret);
 }
 
 // checks all arguments, returns 0 if there is a character that is not a number
@@ -269,7 +211,11 @@ void	print_lists(t_list *list_a, t_list *list_b)
 	{
 		// ft_printf("%d %d\n", list_a->content, list_b->content);
 		if (list_a)
+		{
 			ft_printf("%d", ((t_node *)list_a->content)->value);
+			//ft_printf("next pointer: %p\n",(t_node *)list_a->next);
+		}
+			
 		else
 			ft_printf(" ");
 		ft_printf(" ");
@@ -293,7 +239,10 @@ void	print_lists_index(t_list *list_a, t_list *list_b)
 	{
 		// ft_printf("%d %d\n", list_a->content, list_b->content);
 		if (list_a)
+		{
 			ft_printf("%d", ((t_node *)list_a->content)->index);
+			//ft_printf("next pointer: %p\n",(t_node *)list_a->next);
+		}
 		else
 			ft_printf(" ");
 		ft_printf(" ");
