@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 17:37:13 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:03:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	push_stuff_to_b(t_list **stack_a, t_list **stack_b);
 void	sort_three_or_less(t_list **stack_a);
 void	push_stuff_back_to_a(t_list **stack_a, t_list **stack_b);
 t_list	*find_elem_with_highest_index(t_list *stack_b);
-void find_direction_and_rotate (t_list **stack_b, t_list* elem_biggest_index);
-void rotation_manager (t_list **stack_b, int count, int direction);
+void	find_direction_and_rotate(t_list **stack_b, t_list *elem_biggest_index);
+void	rotation_manager(t_list **stack_b, int count, int direction);
+int		is_digit_or_minus(int c);
+int		check_single_input(char *str);
 
 #endif

@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 18:02:37 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:09:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//int		check_input(char **args);
-//int		check_single_input(char *str);
+// int		check_input(char **args);
+// int		check_single_input(char *str);
 
 int	main(int argc, char **args)
 {
@@ -21,7 +21,6 @@ int	main(int argc, char **args)
 	t_list	*stack_b;
 	int		n;
 
-	(void)stack_b;
 	if (argc <= 1 || !args)
 		return (ft_printf("Error\n"), -1);
 	if (!check_input(args))
@@ -29,12 +28,12 @@ int	main(int argc, char **args)
 	stack_a = NULL; // brauch ich dann nicht mehr wenn init_stack_a
 	stack_b = NULL;
 	init_stack_a(&stack_a, args);
-	// init_stack_b_testing(&stack_b);
+	ft_printf("input numbers\n");
 	print_lists(stack_a, stack_b);
 	// pseudo code of what to do
 	// 1. create indices for the list starting at 1
 	init_indices(&stack_a);
-	//set variable n (median of the stack)
+	// set variable n (median of the stack)
 	n = count_nodes(stack_a) / 2;
 	ft_printf("STEP 1 - printing stacks - INDEX\n");
 	print_lists_index(stack_a, stack_b);
@@ -45,18 +44,24 @@ int	main(int argc, char **args)
 	ft_printf("printf after stack splitting\n");
 	print_lists_index(stack_a, stack_b);
 	// 3. push all elems but 3 to b (pb)
+	ft_printf("\nSTEP 3 - push all elems but 3 to b\n");
 	push_stuff_to_b(&stack_a, &stack_b);
+	ft_printf("-------------------------------------------\n");
 	ft_printf("printf after push_stuff_to_b\n");
 	print_lists_index(stack_a, stack_b);
 	// 4. sort 3 on a hardcoded
+	ft_printf("\nSTEP 4 - sort max 3 elements\n");
 	sort_three_or_less(&stack_a);
+	ft_printf("-------------------------------------------\n");
 	ft_printf("printf after swap_three_or_less\n");
 	print_lists_index(stack_a, stack_b);
 	// 5. intelligent push backs from b to a
+	ft_printf("\nSTEP 5 - intelligent pushbacks to a\n");
 	push_stuff_back_to_a(&stack_a, &stack_b);
+	ft_printf("-------------------------------------------\n");
 	ft_printf("printf after pushback\n");
-	print_lists_index(stack_a, stack_b);	
-	ft_printf("printf after pushback AS VALUES\n");
+	print_lists_index(stack_a, stack_b);
+	ft_printf("\nprintf after pushback AS VALUES\n");
 	print_lists(stack_a, stack_b);
 	// sa(&stack_a);
 	// print_list(stack_a);
@@ -67,8 +72,8 @@ int	main(int argc, char **args)
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
 	// TEST FOR pb
-	//pb(&stack_a, &stack_b);
-	//print_lists(stack_a, stack_b);
+	// pb(&stack_a, &stack_b);
+	// print_lists(stack_a, stack_b);
 	// ft_printf("\n trying ra\n");
 	// ra(&stack_a);
 	// ft_printf("printing stack A\n");
@@ -82,14 +87,15 @@ int	main(int argc, char **args)
 	// ft_printf("\nprinting stack B\n");
 	// print_list(stack_b);
 }
-/* 	a. find element with the highest index 
+/* 	a. find element with the highest index
 	b. find cheapest way to push that element to the top of b (either rb or rrb)
 	c. execute either rb or rrb until that element is at the top of b
 	d. push that element to a (pa)
 	e. repeat from a until stack b is empty */
 void	push_stuff_back_to_a(t_list **stack_a, t_list **stack_b)
 {
-	t_list *elem_biggest_index;
+	t_list	*elem_biggest_index;
+
 	while (*stack_b)
 	{
 		elem_biggest_index = find_elem_with_highest_index(*stack_b);
@@ -98,15 +104,14 @@ void	push_stuff_back_to_a(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-//returns 1 if the element is in the top half and 2 if the element is in the bottom half
-void find_direction_and_rotate (t_list **stack_b, t_list* elem_biggest_index)
+// returns 1 if the element is in the top half and 2 if the element is in the bottom half
+void	find_direction_and_rotate(t_list **stack_b, t_list *elem_biggest_index)
 {
-	size_t length;
-	size_t counter;
-	size_t bottom;
-	
-	t_list *cur;
-	
+	size_t	length;
+	size_t	counter;
+	size_t	bottom;
+	t_list	*cur;
+
 	length = count_nodes(*stack_b);
 	counter = 0;
 	cur = *stack_b;
@@ -118,19 +123,19 @@ void find_direction_and_rotate (t_list **stack_b, t_list* elem_biggest_index)
 	bottom = length - counter;
 	if (counter <= bottom)
 	{
-		//a bunch of rb
-		//dir = 2
+		// a bunch of rb
+		// dir = 2
 		rotation_manager(stack_b, counter, 2);
 	}
 	else
 	{
-		//a bunch of rrb
-		//dir = 1
+		// a bunch of rrb
+		// dir = 1
 		rotation_manager(stack_b, bottom, 1);
 	}
 }
 
-void rotation_manager (t_list **stack_b, int count, int direction)
+void	rotation_manager(t_list **stack_b, int count, int direction)
 {
 	while (count > 0)
 	{
@@ -142,144 +147,95 @@ void rotation_manager (t_list **stack_b, int count, int direction)
 	}
 }
 
-t_list*	find_elem_with_highest_index(t_list *stack_b)
+t_list	*find_elem_with_highest_index(t_list *stack_b)
 {
-	int max;
-	t_list* p_max;
-	
+	int		max;
+	t_list	*p_max;
+
 	if (!stack_b)
-		return NULL;
+		return (NULL);
 	max = 0;
 	p_max = NULL;
 	while (stack_b)
 	{
-		if (((t_node*)stack_b->content)->index > max)
+		if (((t_node *)stack_b->content)->index > max)
 		{
-			max = ((t_node*)stack_b->content)->index;
+			max = ((t_node *)stack_b->content)->index;
 			p_max = stack_b;
 		}
-			
 		if (stack_b->next)
 			stack_b = stack_b->next;
-		else break ;
+		else
+			break ;
 	}
-	return p_max;
+	return (p_max);
 }
 void	sort_three_or_less(t_list **stack_a)
 {
-	int top;
-	int mid;
-	int btm;
+	int	top;
+	int	mid;
+	int	btm;
 
 	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
 		return ;
 	mid = 0;
 	btm = 0;
-	//TODO failguards
-	top = ((t_node*)((*stack_a)->content))->index;
+	// TODO failguards
+	top = ((t_node *)((*stack_a)->content))->index;
 	if ((*stack_a)->next)
-		mid = ((t_node*)((*stack_a)->next->content))->index;
+		mid = ((t_node *)((*stack_a)->next->content))->index;
 	if ((*stack_a)->next->next)
-		btm = ((t_node*)((*stack_a)->next->next->content))->index;
+		btm = ((t_node *)((*stack_a)->next->next->content))->index;
 	if (top > mid && top > btm)
 		ra(stack_a);
 	else if (mid > top && mid > btm)
 		rra(stack_a);
-	top = ((t_node*)((*stack_a)->content))->index;
-	mid = ((t_node*)((*stack_a)->next->content))->index;
+	top = ((t_node *)((*stack_a)->content))->index;
+	mid = ((t_node *)((*stack_a)->next->content))->index;
 	if (top > mid)
 		sa(stack_a);
 }
 
-//pushes all but 3 elements from a to b
-void push_stuff_to_b(t_list **stack_a, t_list** stack_b)
+// pushes all but 3 elements from a to b
+void	push_stuff_to_b(t_list **stack_a, t_list **stack_b)
 {
-	int nodes;
-	
+	int	nodes;
+
 	nodes = count_nodes(*stack_a);
-	while (nodes > 3)
+	// while (nodes > 3)
+	while (nodes > 0)
 	{
 		pb(stack_a, stack_b);
 		nodes--;
 	}
 }
 
-/* this function splits stack a in half. if an element is smaller than N/2 it will be pushed 
+/* this function splits stack a in half. if an element is smaller than N/2 it will be pushed
 to stack_b. otherwise it will be put at the end of stack a (ra)*/
-void split_stacks (t_list** stack_a, t_list **stack_b, int n)
+void	split_stacks(t_list **stack_a, t_list **stack_b, int n)
 {
-	size_t size_stack_a;
-	size_t count_operations;
-	
+	size_t	size_stack_a;
+	size_t	count_operations;
+
 	size_stack_a = count_nodes(*stack_a);
 	count_operations = 0;
 	printf("n is %d\n", n);
 	while (count_operations < size_stack_a)
 	{
-		if (((t_node*)(*stack_a)->content)->index <= n)
+		if (((t_node *)(*stack_a)->content)->index <= n)
 			pb(stack_a, stack_b);
 		else
-			ra(stack_a);		
+			ra(stack_a);
 		count_operations++;
 	}
 }
 
-// checks all arguments, returns 0 if there is a character that is not a number
-// TODO -5 is currently an error, that should be fine though
-// TODO if there are any duplicates -> error
-int	check_input(char **args)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	while (args[i])
-	{
-		j = 0;
-		while (args[i][j])
-		{
-			if (args[i][j] < 48 || args[i][j] > 57)
-				return (0);
-			j++;
-		}
-		i++;
-		// alternative approach:
-		/* 		if (!check_single_input(args[i]))
-					return (0); */
-	}
-	return (1);
-}
-/*
-int	check_single_input(char *str)
-{
-	int		i;
-	int		minus;
-	size_t	i;
-	t_list	*new;
-	t_node	*node_content;
-	int		i;
-	t_list	*new;
-	t_node	*node_content;
-	int		i;
-	t_list	*new;
-	t_node	*node_content;
-
-	i = 0;
-	minus = 0;
-	while(str[i])
-	{
-		if (minus && (str[i] < 48 || str[i] > 57))
-			i++;
-		else if (str[i] < 48 || str[i] > 57)
-	}
-} */
 void	init_stack_a(t_list **list, char **args)
 {
-	//why tf is this deleted if i auto format 
-	int i;
-	t_list * new;
-	t_node *node_content;
-	
+	int		i;
+	t_list	*new;
+	t_node	*node_content;
+
 	i = 1;
 	while (args[i])
 	{
@@ -309,35 +265,6 @@ void	init_stack_a(t_list **list, char **args)
 	}
 }
 
-// this is for testing, remove later
-void	init_stack_b_testing(t_list **list)
-{
-	size_t	i;
-	size_t	j;
-	t_list	*new;
-	int		*num_content;
-
-	i = 0;
-	j = 5;
-	while (i < j)
-	{
-		new = malloc(sizeof(t_list));
-		if (!new)
-			return ;
-		num_content = malloc(sizeof(int));
-		if (!num_content)
-		{
-			free(new);
-			return ;
-		}
-		*num_content = i;
-		new->content = num_content;
-		new->next = NULL;
-		ft_lstadd_back(list, new);
-		i++;
-	}
-}
-
 void	print_lists(t_list *list_a, t_list *list_b)
 {
 	while (list_a || list_b)
@@ -346,9 +273,8 @@ void	print_lists(t_list *list_a, t_list *list_b)
 		if (list_a)
 		{
 			ft_printf("%d", ((t_node *)list_a->content)->value);
-			//ft_printf("next pointer: %p\n",(t_node *)list_a->next);
+			// ft_printf("next pointer: %p\n",(t_node *)list_a->next);
 		}
-			
 		else
 			ft_printf(" ");
 		ft_printf(" ");
@@ -374,7 +300,7 @@ void	print_lists_index(t_list *list_a, t_list *list_b)
 		if (list_a)
 		{
 			ft_printf("%d", ((t_node *)list_a->content)->index);
-			//ft_printf("next pointer: %p\n",(t_node *)list_a->next);
+			// ft_printf("next pointer: %p\n",(t_node *)list_a->next);
 		}
 		else
 			ft_printf(" ");
@@ -406,3 +332,32 @@ void	print_lists_index(t_list *list_a, t_list *list_b)
 // 		i++;
 // 	}
 // }
+
+/* // this is for testing, remove later
+void	init_stack_b_testing(t_list **list)
+{
+	size_t	i;
+	size_t	j;
+	t_list	*new;
+	int		*num_content;
+
+	i = 0;
+	j = 5;
+	while (i < j)
+	{
+		new = malloc(sizeof(t_list));
+		if (!new)
+			return ;
+		num_content = malloc(sizeof(int));
+		if (!num_content)
+		{
+			free(new);
+			return ;
+		}
+		*num_content = i;
+		new->content = num_content;
+		new->next = NULL;
+		ft_lstadd_back(list, new);
+		i++;
+	}
+} */
