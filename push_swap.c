@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 13:27:29 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:57:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,72 +21,49 @@ int	main(int argc, char **args)
 	t_list	*stack_b;
 	int		n;
 
+	//ft_printf("argc is %d\n", argc);
 	if (argc <= 1 || !args)
-		return (ft_printf("Error\n"), -1);
+		return (ft_printf("Error1\n"), -1);
 	if (!check_input(args))
-		return (ft_printf("Error\n"), -1);
+		return (ft_printf("Error2\n"), -1);
 	stack_a = NULL; // brauch ich dann nicht mehr wenn init_stack_a
 	stack_b = NULL;
 	if (!init_stack_a(&stack_a, args))
-		return (ft_printf("Error\n"), -1);
-	ft_printf("input numbers\n");
-	print_lists(stack_a, stack_b);
-	// pseudo code of what to do
+		return (ft_printf("Error3\n"), -1);
+	//ft_printf("input numbers\n");
+	//print_lists(stack_a, stack_b);
 	// 1. create indices for the list starting at 1
 	init_indices(&stack_a);
 	// set variable n (median of the stack)
 	n = count_nodes(stack_a) / 2;
-	ft_printf("STEP 1 - printing stacks - INDEX\n");
-	print_lists_index(stack_a, stack_b);
+	//ft_printf("STEP 1 - printing stacks - INDEX\n");
+	//print_lists_index(stack_a, stack_b);
 	// 2. split the stack in half with N/2, if num < N -> pb ; else ra
-	ft_printf("\nSTEP 2 - stack splitting\n");
+	//ft_printf("\nSTEP 2 - stack splitting\n");
 	split_stacks(&stack_a, &stack_b, n);
-	ft_printf("-------------------------------------------\n");
-	ft_printf("printf after stack splitting\n");
-	print_lists_index(stack_a, stack_b);
+	//ft_printf("-------------------------------------------\n");
+	//ft_printf("printf after stack splitting\n");
+	//(stack_a, stack_b);
 	// 3. push all elems but 3 to b (pb)
-	ft_printf("\nSTEP 3 - push all elems but 3 to b\n");
+	//ft_printf("\nSTEP 3 - push all elems but 3 to b\n");
 	push_stuff_to_b(&stack_a, &stack_b);
-	ft_printf("-------------------------------------------\n");
-	ft_printf("printf after push_stuff_to_b\n");
-	print_lists_index(stack_a, stack_b);
+	//ft_printf("-------------------------------------------\n");
+	//ft_printf("printf after push_stuff_to_b\n");
+	//print_lists_index(stack_a, stack_b);
 	// 4. sort 3 on a hardcoded
-	ft_printf("\nSTEP 4 - sort max 3 elements\n");
+	//ft_printf("\nSTEP 4 - sort max 3 elements\n");
 	sort_three_or_less(&stack_a);
-	ft_printf("-------------------------------------------\n");
-	ft_printf("printf after swap_three_or_less\n");
-	print_lists_index(stack_a, stack_b);
+	//ft_printf("-------------------------------------------\n");
+	//ft_printf("printf after swap_three_or_less\n");
+	//print_lists_index(stack_a, stack_b);
 	// 5. intelligent push backs from b to a
-	ft_printf("\nSTEP 5 - intelligent pushbacks to a\n");
+	//ft_printf("\nSTEP 5 - intelligent pushbacks to a\n");
 	push_stuff_back_to_a(&stack_a, &stack_b);
-	ft_printf("-------------------------------------------\n");
-	ft_printf("printf after pushback\n");
-	print_lists_index(stack_a, stack_b);
-	ft_printf("\nprintf after pushback AS VALUES\n");
-	print_lists(stack_a, stack_b);
-	// sa(&stack_a);
-	// print_list(stack_a);
-	// ft_printf("\n trying pa\n");
-	// pa(&stack_a, &stack_b);
-	// ft_printf("printing stack A\n");
-	// print_list(stack_a);
-	// ft_printf("\nprinting stack B\n");
-	// print_list(stack_b);
-	// TEST FOR pb
-	// pb(&stack_a, &stack_b);
-	// print_lists(stack_a, stack_b);
-	// ft_printf("\n trying ra\n");
-	// ra(&stack_a);
-	// ft_printf("printing stack A\n");
-	// print_list(stack_a);
-	// ft_printf("\nprinting stack B\n");
-	// print_list(stack_b);
-	// ft_printf("\n trying rra\n");
-	// rra(&stack_a);
-	// ft_printf("printing stack A\n");
-	// print_list(stack_a);
-	// ft_printf("\nprinting stack B\n");
-	// print_list(stack_b);
+	//ft_printf("-------------------------------------------\n");
+	//ft_printf("printf after pushback\n");
+	//print_lists_index(stack_a, stack_b);
+	//ft_printf("\nprintf after pushback AS VALUES\n");
+	//print_lists(stack_a, stack_b);
 }
 /* 	a. find element with the highest index
 	b. find cheapest way to push that element to the top of b (either rb or rrb)
@@ -220,7 +197,7 @@ void	split_stacks(t_list **stack_a, t_list **stack_b, int n)
 
 	size_stack_a = count_nodes(*stack_a);
 	count_operations = 0;
-	printf("n is %d\n", n);
+	//ft_printf("n is %d\n", n);
 	while (count_operations < size_stack_a)
 	{
 		if (((t_node *)(*stack_a)->content)->index <= n)

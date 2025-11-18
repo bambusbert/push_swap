@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:19:41 by slambert          #+#    #+#             */
-/*   Updated: 2025/10/10 12:50:47 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:08:48 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ static int	count_words(char const *s, size_t len, char c)
 	return (word_count);
 }
 
-//triple pointer wtf
 static char	**free_all(char **strarr, int i)
 {
 	while (i-- > 0)

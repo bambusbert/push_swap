@@ -6,14 +6,13 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:04:31 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 13:27:47 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:52:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // checks all arguments, returns 0 if there is a character that is not a number
-// TODO if there are any duplicates -> error
 int	check_input(char **args)
 {
 	int	i;
@@ -26,11 +25,17 @@ int	check_input(char **args)
 		while (args[i][j])
 		{
 			if (!is_digit_or_minus(args[i][j]))
-				return (0);
+			{
+                printf("other character than digit or minus\n");
+                return (0);
+            }	
 			j++;
 		}
 		if (!check_single_input(args[i]))
-			return (0);
+        {
+            printf("single input check failed\n");
+            return (0);
+        }
 		i++;
 	}
 	return (1);
@@ -50,7 +55,7 @@ int	check_single_input(char *str)
 	}
 	while (str[i])
 	{
-		if (str[i] <= '0' || str[i] >= '9')
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
 	}
