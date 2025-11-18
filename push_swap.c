@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 13:09:54 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:27:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int argc, char **args)
 		return (ft_printf("Error\n"), -1);
 	stack_a = NULL; // brauch ich dann nicht mehr wenn init_stack_a
 	stack_b = NULL;
-	init_stack_a(&stack_a, args);
+	if (!init_stack_a(&stack_a, args))
+		return (ft_printf("Error\n"), -1);
 	ft_printf("input numbers\n");
 	print_lists(stack_a, stack_b);
 	// pseudo code of what to do
@@ -230,7 +231,8 @@ void	split_stacks(t_list **stack_a, t_list **stack_b, int n)
 	}
 }
 
-void	init_stack_a(t_list **list, char **args)
+//returns 0 if any duplicates are found
+int	init_stack_a(t_list **list, char **args)
 {
 	int		i;
 	t_list	*new;
@@ -241,7 +243,7 @@ void	init_stack_a(t_list **list, char **args)
 	{
 		new = malloc(sizeof(t_list));
 		if (!new)
-			return ;
+			return 0;
 		// num_content = malloc(sizeof(int));
 		// if (!num_content)
 		// {
@@ -252,7 +254,7 @@ void	init_stack_a(t_list **list, char **args)
 		if (!node_content)
 		{
 			free(new);
-			return ;
+			return 0;
 		}
 		// *num_content = ft_atoi(args[i]);
 		node_content->value = ft_atoi(args[i]);
@@ -263,6 +265,9 @@ void	init_stack_a(t_list **list, char **args)
 		ft_lstadd_back(list, new);
 		i++;
 	}
+	if (check_list_for_duplicates (*list))
+		return 0;
+	return 1;
 }
 
 void	print_lists(t_list *list_a, t_list *list_b)

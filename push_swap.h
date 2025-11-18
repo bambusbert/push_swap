@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 13:03:33 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:20:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_indices(t_list **list);
 size_t	count_nodes(t_list *list);
 void	bubble_sort_array(t_node **node_array, size_t size);
 void	fill_out_indices(t_node **node_array, size_t size);
-void	init_stack_a(t_list **list, char **args);
+int		init_stack_a(t_list **list, char **args);
 void	init_stack_b_testing(t_list **list);
 void	print_list(t_list *list); // remove after testing!
 void	print_lists(t_list *list_a, t_list *list_b);
@@ -56,5 +56,7 @@ void	find_direction_and_rotate(t_list **stack_b, t_list *elem_biggest_index);
 void	rotation_manager(t_list **stack_b, int count, int direction);
 int		is_digit_or_minus(int c);
 int		check_single_input(char *str);
+int		check_list_for_duplicates(t_list *list);
+int		check_array_for_duplicates(int *int_arr, size_t size);
 
 #endif
