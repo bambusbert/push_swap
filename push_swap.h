@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/19 15:45:52 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:03:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,8 @@ void	bubble_sort_array(t_node **node_array, size_t size);
 void	fill_out_indices(t_node **node_array, size_t size);
 int		init_stack_a(t_list **list, char **args);
 void	init_stack_b_testing(t_list **list);
-void	print_list(t_list *list); // remove after testing!
-void	print_lists(t_list *list_a, t_list *list_b);
-void	print_lists_index(t_list *list_a, t_list *list_b);
-void	split_stacks(t_list **stack_a, t_list **stack_b, int n);
+
 void	push_stuff_to_b(t_list **stack_a, t_list **stack_b);
-void	sort_three_or_less(t_list **stack_a);
 void	push_stuff_back_to_a(t_list **stack_a, t_list **stack_b);
 t_list	*find_elem_with_highest_index(t_list *stack_b);
 void	find_direction_and_rotate(t_list **stack_b, t_list *elem_biggest_index);
@@ -60,5 +56,12 @@ int		check_list_for_duplicates(t_list *list);
 int		check_array_for_duplicates(int *int_arr, size_t size);
 void	chunk_sort(t_list **stack_a, t_list **stack_b, int size_stack_a);
 int		calculate_amount_of_chunks(int size_stack);
+
+/*
+void	split_stacks(t_list **stack_a, t_list **stack_b, int n);
+void	sort_three_or_less(t_list **stack_a);
+void	print_lists(t_list *list_a, t_list *list_b);
+void	print_lists_index(t_list *list_a, t_list *list_b); 
+*/
 
 #endif

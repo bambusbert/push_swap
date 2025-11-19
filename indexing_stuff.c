@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:54:52 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/17 16:50:30 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:10:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 create a temporary array of node pointers
 sort this array by bubble sort
 fill out indices */
+//TODO error handling
 void	init_indices(t_list **list)
 {
 	size_t	arr_size;
@@ -24,7 +25,6 @@ void	init_indices(t_list **list)
 	t_node	**node_array;
 
 	arr_size = count_nodes(*list);
-	//printf("The array has %zu elements\n", arr_size);
 	node_array = malloc(sizeof(t_node *) * arr_size);
 	// if (!node_array)
 	// error handling

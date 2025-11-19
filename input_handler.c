@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:04:31 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 17:52:51 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:10:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,17 @@ int	check_input(char **args)
 		while (args[i][j])
 		{
 			if (!is_digit_or_minus(args[i][j]))
-			{
-                printf("other character than digit or minus\n");
-                return (0);
-            }	
+				return (0);
 			j++;
 		}
 		if (!check_single_input(args[i]))
-        {
-            printf("single input check failed\n");
-            return (0);
-        }
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
+// TODO include check if numbers are too small or too big
 int	check_single_input(char *str)
 {
 	int		minus;
@@ -94,8 +89,8 @@ int	check_list_for_duplicates(t_list *list)
 
 int	check_array_for_duplicates(int *int_arr, size_t size)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (i < size)
