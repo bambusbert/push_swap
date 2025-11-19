@@ -6,12 +6,14 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/19 16:06:48 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:48:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+//TODO STDERR??
+//TODO INTEGER limits
 /* 1. create indices for the list starting at 1
 2. set variable n (median of the stack)
 3. chunk sort
@@ -23,7 +25,9 @@ int	main(int argc, char **args)
 	t_list	*stack_b;
 	int		n;
 
-	if (argc <= 1 || !args)
+	if (argc == 1)
+		return -1;
+	if (argc < 1 || !args)
 		return (ft_printf("Error\n"), -1);
 	if (!check_input(args))
 		return (ft_printf("Error\n"), -1);

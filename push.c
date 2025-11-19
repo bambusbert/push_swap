@@ -6,13 +6,12 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:05:46 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 14:25:23 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:39:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//possible TODO '+'
 // take the first element of src and puts it in the beginning (on top) of dest
 void	push(t_list **dest, t_list **src)
 {

@@ -6,24 +6,12 @@
 #    By: slambert <slambert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 13:28:23 by slambert          #+#    #+#              #
-#    Updated: 2025/11/19 15:58:06 by slambert         ###   ########.fr        #
+#    Updated: 2025/11/19 16:44:14 by slambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #TODO call makefile from libft from here
-
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: slambert <slambert@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/11 13:28:23 by slambert          #+#    #+#              #
-#    Updated: 2025/11/18 13:05:57 by slambert         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+#TODO without relinking
 NAME = push_swap
 
 SRC = push_swap.c swap.c push.c rotate.c reverse_rotate.c indexing_stuff.c input_handler.c
