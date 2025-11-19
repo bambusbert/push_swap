@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 19:02:08 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:45:35 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	main(int argc, char **args)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	int		n;
-	int show_print = 1;
+	int show_print = 0;
 
 	//ft_printf("argc is %d\n", argc);
 	if (argc <= 1 || !args)
 		return (ft_printf("Error1\n"), -1);
 	if (!check_input(args))
 		return (ft_printf("Error2\n"), -1);
-	stack_a = NULL; // brauch ich dann nicht mehr wenn init_stack_a
+	stack_a = NULL;
 	stack_b = NULL;
 	if (!init_stack_a(&stack_a, args))
 		return (ft_printf("Error3\n"), -1);
@@ -41,14 +41,17 @@ int	main(int argc, char **args)
 		print_lists_index(stack_a, stack_b);
 	// 2. split the stack in half with N/2, if num < N -> pb ; else ra
 	if (show_print)
-		ft_printf("\nSTEP 2 - stack splitting\n");
-	split_stacks(&stack_a, &stack_b, n);
+		ft_printf("\nSTEP 2 - stack splitting OR chunk sort\n");
+	//method 1: split stacks in 2. that is very inefficient for 500 numbers
+	//split_stacks(&stack_a, &stack_b, n);
+	//method 2: chunk sort.
+	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
 	if (show_print)
 		ft_printf("-------------------------------------------\n");
 	if (show_print)
 	{
 		ft_printf("printf after stack splitting\n");
-		print_lists_index(stack_a, stack_b);
+		print_lists_index(stack_a, stack_b); 
 	}
 	// 3. push all elems but 3 to b (pb)
 	if (show_print)
@@ -85,6 +88,7 @@ int	main(int argc, char **args)
 	if (show_print)
 		print_lists(stack_a, stack_b);
 }
+
 /* 	a. find element with the highest index
 	b. find cheapest way to push that element to the top of b (either rb or rrb)
 	c. execute either rb or rrb until that element is at the top of b
@@ -220,17 +224,91 @@ void	split_stacks(t_list **stack_a, t_list **stack_b, int n)
 	//ft_printf("n is %d\n", n);
 	while (count_operations < size_stack_a)
 	{
+		//100 most efficient: 1.25
+		//500 most efficient: 1.22
 		if (((t_node *)(*stack_a)->content)->index <= n)
 			pb(stack_a, stack_b);
 		else
+		{
+			//method 1: rotate to the end of stack a - this is more efficient than method 2
 			ra(stack_a);
+			//method 2: push to stack b and rotate b
+			//pb(stack_a, stack_b);
+			//rb(stack_b);
+		}	
 		count_operations++;
 	}
 }
 
+// creates separate chunks (depending on the size of the list to be sorted).
+// temporarily we use 10 chunks (should be good for 500 random numbers)
+void	chunk_sort(t_list **stack_a, t_list **stack_b, int size_stack_a)
+{
+	size_t how_many_chunks;
+	size_t current_chunk;
+	size_t size_stack_a_orig;
+	int lower_limit;
+	int upper_limit;
+	size_t chunk_counter;
+	
+	size_stack_a_orig = size_stack_a;
+	how_many_chunks = calculate_amount_of_chunks(size_stack_a);
+	current_chunk = 1;
+	chunk_counter = 0;
+	while (1)
+	{
+		if (!*stack_a)
+			break;
+		lower_limit = size_stack_a_orig / how_many_chunks * (current_chunk - 1) + 1;
+		upper_limit = lower_limit + size_stack_a_orig / how_many_chunks - 1;
+		if (((t_node *)(*stack_a)->content)->index >= lower_limit && ((t_node *)(*stack_a)->content)->index <= upper_limit)
+		{
+			pb(stack_a, stack_b);
+			chunk_counter++;
+		}
+		else
+			ra(stack_a);
+		if (chunk_counter == size_stack_a_orig / how_many_chunks)
+		{
+			chunk_counter = 0;
+			current_chunk++;
+			continue ;
+		}
+	}
+}
+
+//for 500 numbers 12-14 is most efficient
+//for 100 numbers 4-6 is most efficient
+int calculate_amount_of_chunks (int size_stack)
+{
+	if (size_stack <= 0)
+		return 0;
+	if (size_stack >= 1 && size_stack <= 9)
+		return 1;
+	if (size_stack >= 10 && size_stack <= 19)
+		return 2;	
+	if (size_stack >= 20 && size_stack <= 49)
+		return 3;	
+	if (size_stack >= 50 && size_stack <= 99)
+		return 5;
+	if (size_stack >= 100 && size_stack <= 199)
+		return 6;
+	if (size_stack >= 200 && size_stack <= 299)
+		return 8;
+	if (size_stack >= 300 && size_stack <= 499)
+		return 10;
+	if (size_stack >= 500 && size_stack <= 699)
+		return 12;	
+	if (size_stack >= 700 && size_stack <= 999)
+		return 14;
+	if (size_stack >= 700 && size_stack <= 999)
+		return 14;
+	return 16;
+}
+
 //returns 0 if any duplicates are found
 int	init_stack_a(t_list **list, char **args)
-{
+{	
 	int		i;
 	t_list	*new;
 	t_node	*node_content;

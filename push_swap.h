@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 13:20:34 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:45:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ int		is_digit_or_minus(int c);
 int		check_single_input(char *str);
 int		check_list_for_duplicates(t_list *list);
 int		check_array_for_duplicates(int *int_arr, size_t size);
+void	chunk_sort(t_list **stack_a, t_list **stack_b, int size_stack_a);
+int		calculate_amount_of_chunks(int size_stack);
 
 #endif
