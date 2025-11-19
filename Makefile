@@ -6,7 +6,7 @@
 #    By: slambert <slambert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 13:28:23 by slambert          #+#    #+#              #
-#    Updated: 2025/11/19 16:44:14 by slambert         ###   ########.fr        #
+#    Updated: 2025/11/19 16:52:01 by slambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ $(NAME): ${LIBFT} ${OBJS}
 
 ${LIBFT}:
 		@make -C libft bonus
+#aslfjnehjfvbwejkbv
 
 all:	${NAME}
 
