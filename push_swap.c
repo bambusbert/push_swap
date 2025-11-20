@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/19 16:48:49 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:11:22 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	main(int argc, char **args)
 	if (argc == 1)
 		return -1;
 	if (argc < 1 || !args)
-		return (ft_printf("Error\n"), -1);
+		return (ft_putstr_fd("Error\n", 1), -1);
 	if (!check_input(args))
-		return (ft_printf("Error\n"), -1);
+		return (ft_putstr_fd("Error\n", 1), -1);
 	stack_a = NULL;
 	stack_b = NULL;
 	if (!init_stack_a(&stack_a, args))
-		return (ft_printf("Error\n"), -1);
+		return (ft_putstr_fd("Error\n", 1), -1);
 	init_indices(&stack_a);
 	n = count_nodes(stack_a) / 2;
 	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
@@ -202,38 +202,45 @@ int	calculate_amount_of_chunks(int size_stack)
 int	init_stack_a(t_list **list, char **args)
 {
 	int		i;
+	int		*atoi_res;
 	t_list	*new;
 	t_node	*node_content;
 
 	i = 1;
+	atoi_res = malloc (sizeof(int));
 	while (args[i])
 	{
 		new = malloc(sizeof(t_list));
 		if (!new)
+		{
+			free(atoi_res);
 			return (0);
-		// num_content = malloc(sizeof(int));
-		// if (!num_content)
-		// {
-		// 	free(new);
-		// 	return ;
-		// }
+		}
+			
 		node_content = malloc(sizeof(t_node));
 		if (!node_content)
 		{
 			free(new);
+			free(atoi_res);
 			return (0);
 		}
-		// *num_content = ft_atoi(args[i]);
-		node_content->value = ft_atoi(args[i]);
+		if (!ft_atoi_checked(args[i], atoi_res))
+			return 0;
+		node_content->value = *atoi_res;
 		node_content->index = 0;
-		// new->content = num_content;
 		new->content = node_content;
 		new->next = NULL;
 		ft_lstadd_back(list, new);
 		i++;
 	}
 	if (check_list_for_duplicates(*list))
+	{
+		free(new);
+		free(atoi_res);
+		free (node_content);
 		return (0);
+	}
+	free(atoi_res);
 	return (1);
 }
 /*

@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 17:44:38 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/12 17:50:19 by slambert         ###   ########.fr       */
+/*   Created: 2025/11/20 11:29:27 by slambert          #+#    #+#             */
+/*   Updated: 2025/11/20 11:45:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (lst && new)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
+}
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
@@ -27,4 +36,36 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
             curr = curr->next;
         curr->next = new;
 	}
+}
+
+size_t	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
+	write(fd, s, ft_strlen(s));
+	return (ft_strlen(s));
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

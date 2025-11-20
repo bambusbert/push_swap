@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_checked.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:16:08 by slambert          #+#    #+#             */
-/*   Updated: 2025/10/10 16:07:00 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:15:18 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static const char	*shift_whitespace(const char *nptr);
 static int			sign_handler(const char *nptr);
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi_checked(const char *nptr, int *result)
 {
 	int			i;
 	long long	num;
@@ -25,23 +25,23 @@ int	ft_atoi(const char *nptr)
 		return (0);
 	nptr = shift_whitespace(nptr);
 	minus = sign_handler(nptr);
-	if (minus == -1)
-		return (0);
 	if (minus == 2 || minus == 3)
 		nptr++;
 	num = 0;
 	i = 0;
-	while (nptr[i])
+	while (nptr[i++])
 	{
-		if (!(nptr[i] >= '0' && nptr[i] <= '9'))
+		if (!(nptr[i - 1] >= '0' && nptr[i - 1] <= '9'))
 			break ;
 		num *= 10;
-		num += nptr[i] - 48;
-		i++;
+		num += nptr[i - 1] - 48;
 	}
 	if (minus == 3)
 		num *= (-1);
-	return ((int)num);
+	if (num < INT_MIN || num > INT_MAX)
+		return (0);
+	*result = (int)num;
+	return (1);
 }
 
 static int	sign_handler(const char *nptr)
@@ -75,7 +75,7 @@ static const char	*shift_whitespace(const char *nptr)
 		i++;
 	return (&nptr[i]);
 }
-/* 
+/*
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
