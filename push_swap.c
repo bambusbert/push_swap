@@ -6,14 +6,13 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 12:11:22 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:34:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//TODO STDERR??
-//TODO INTEGER limits
+// TODO STDERR??
 /* 1. create indices for the list starting at 1
 2. set variable n (median of the stack)
 3. chunk sort
@@ -23,10 +22,9 @@ int	main(int argc, char **args)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
-	int		n;
 
 	if (argc == 1)
-		return -1;
+		return (-1);
 	if (argc < 1 || !args)
 		return (ft_putstr_fd("Error\n", 1), -1);
 	if (!check_input(args))
@@ -36,10 +34,10 @@ int	main(int argc, char **args)
 	if (!init_stack_a(&stack_a, args))
 		return (ft_putstr_fd("Error\n", 1), -1);
 	init_indices(&stack_a);
-	n = count_nodes(stack_a) / 2;
 	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
 	push_stuff_to_b(&stack_a, &stack_b);
 	push_stuff_back_to_a(&stack_a, &stack_b);
+	free_lists(&stack_a, &stack_b);
 }
 
 /* 	a. find element with the highest index
@@ -131,42 +129,43 @@ void	push_stuff_to_b(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-// creates separate chunks (depending on the size of the list to be sorted)
 void	chunk_sort(t_list **stack_a, t_list **stack_b, int size_stack_a)
 {
-	size_t	how_many_chunks;
-	size_t	current_chunk;
-	size_t	size_stack_a_orig;
-	int		lower_limit;
-	int		upper_limit;
-	size_t	chunk_counter;
+	t_chunk_info	chunk;
+	int				idx;
 
-	size_stack_a_orig = size_stack_a;
-	how_many_chunks = calculate_amount_of_chunks(size_stack_a);
-	current_chunk = 1;
-	chunk_counter = 0;
+	init_chunk_info(&chunk, size_stack_a);
 	while (1)
 	{
 		if (!*stack_a)
 			break ;
-		lower_limit = size_stack_a_orig / how_many_chunks * (current_chunk - 1)
-			+ 1;
-		upper_limit = lower_limit + size_stack_a_orig / how_many_chunks - 1;
-		if (((t_node *)(*stack_a)->content)->index >= lower_limit
-			&& ((t_node *)(*stack_a)->content)->index <= upper_limit)
+		chunk.cur_lower_limit = chunk.size * (chunk.current_chunk - 1) + 1;
+		chunk.cur_upper_limit = chunk.cur_lower_limit + chunk.size - 1;
+		idx = ((t_node *)(*stack_a)->content)->index;
+		if (idx >= chunk.cur_lower_limit && idx <= chunk.cur_upper_limit)
 		{
 			pb(stack_a, stack_b);
-			chunk_counter++;
+			chunk.pushed_count++;
 		}
 		else
 			ra(stack_a);
-		if (chunk_counter == size_stack_a_orig / how_many_chunks)
+		if (chunk.pushed_count >= chunk.size)
 		{
-			chunk_counter = 0;
-			current_chunk++;
-			continue ;
+			chunk.pushed_count = 0;
+			chunk.current_chunk++;
 		}
 	}
+}
+
+void	init_chunk_info(t_chunk_info *chunk, int stack_size)
+{
+	chunk->total_chunks = calculate_amount_of_chunks(stack_size);
+	if (chunk->total_chunks > 0)
+		chunk->size = stack_size / chunk->total_chunks;
+	else
+		chunk->size = stack_size;
+	chunk->current_chunk = 1;
+	chunk->pushed_count = 0;
 }
 
 // for 500 numbers 12-14 is most efficient
@@ -202,47 +201,70 @@ int	calculate_amount_of_chunks(int size_stack)
 int	init_stack_a(t_list **list, char **args)
 {
 	int		i;
-	int		*atoi_res;
+	int		atoi_res;
 	t_list	*new;
-	t_node	*node_content;
 
 	i = 1;
-	atoi_res = malloc (sizeof(int));
 	while (args[i])
 	{
-		new = malloc(sizeof(t_list));
+		if (!ft_atoi_checked(args[i], &atoi_res))
+			return (free_stack(list), 0);
+		new = create_new_list_elem(atoi_res);
 		if (!new)
-		{
-			free(atoi_res);
-			return (0);
-		}
-			
-		node_content = malloc(sizeof(t_node));
-		if (!node_content)
-		{
-			free(new);
-			free(atoi_res);
-			return (0);
-		}
-		if (!ft_atoi_checked(args[i], atoi_res))
-			return 0;
-		node_content->value = *atoi_res;
-		node_content->index = 0;
-		new->content = node_content;
-		new->next = NULL;
+			return (free_stack(list), 0);
 		ft_lstadd_back(list, new);
 		i++;
 	}
 	if (check_list_for_duplicates(*list))
-	{
-		free(new);
-		free(atoi_res);
-		free (node_content);
-		return (0);
-	}
-	free(atoi_res);
+		return (free_stack(list), 0);
 	return (1);
 }
+
+t_list	*create_new_list_elem(int value)
+{
+	t_node	*node_content;
+	t_list	*new_list_elem;
+
+	node_content = malloc(sizeof(t_node));
+	if (!node_content)
+		return (NULL);
+	node_content->value = value;
+	node_content->index = 0;
+	new_list_elem = malloc(sizeof(t_list));
+	if (!new_list_elem)
+	{
+		free(node_content);
+		return (NULL);
+	}
+	new_list_elem->content = node_content;
+	new_list_elem->next = NULL;
+	return (new_list_elem);
+}
+
+void	free_lists(t_list **stack_a, t_list **stack_b)
+{
+	free_stack(stack_a);
+	free_stack(stack_b);
+}
+
+void	free_stack(t_list **stack)
+{
+	t_list	*current_node;
+	t_list	*tmp;
+
+	if (!stack || !*stack)
+		return ;
+	current_node = *stack;
+	while (current_node)
+	{
+		tmp = current_node->next;
+		free(current_node->content);
+		free(current_node);
+		current_node = tmp;
+	}
+	*stack = NULL;
+}
+
 /*
 
 // this function splits stack a in half. if an element is smaller than N/2 it will be pushed

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 12:01:16 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:32:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ typedef struct s_node
 	int				value;
 	int				index;
 }					t_node;
+// size: how many nrs in 1 chunk
+typedef struct s_chunk_info
+{
+	int				size;
+	int				total_chunks;
+	int				current_chunk;
+	int				pushed_count;
+	int				cur_lower_limit;
+	int				cur_upper_limit;
+}					t_chunk_info;
 
 int					check_input(char **args);
 void				swap(t_list **head);
@@ -70,9 +80,13 @@ int					calculate_amount_of_chunks(int size_stack);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 size_t				ft_putstr_fd(char *s, int fd);
 t_list				*ft_lstlast(t_list *lst);
-int					ft_atoi_checked(const char *nptr, int* result);
+int					ft_atoi_checked(const char *nptr, int *result);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 size_t				ft_strlen(const char *str);
+void				free_lists(t_list **stack_a, t_list **stack_b);
+void				free_stack(t_list **stack);
+t_list				*create_new_list_elem(int value);
+void				init_chunk_info(t_chunk_info *chunk, int stack_size);
 
 /*
 void				split_stacks(t_list **stack_a, t_list **stack_b, int n);

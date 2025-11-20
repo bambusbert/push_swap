@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:04:31 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/19 16:39:36 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:18:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,15 @@ int	check_list_for_duplicates(t_list *list)
 		i++;
 	}
 	if (check_array_for_duplicates(int_arr, length))
+	{
+		free (int_arr);
 		return (1);
-	return (0);
+	}
+	else
+	{
+		free (int_arr);
+		return (0);
+	}
 }
 
 int	check_array_for_duplicates(int *int_arr, size_t size)
