@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:04:31 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 14:04:34 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:19:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	is_digit_or_minus(int c)
 	return (0);
 }
 
-// returns 1 if duplicates are found 0 if not
+// returns 1 if duplicates are found (or malloc error) 0 if not
 int	check_list_for_duplicates(t_list *list)
 {
 	int		*int_arr;
@@ -74,6 +74,8 @@ int	check_list_for_duplicates(t_list *list)
 
 	length = count_nodes(list);
 	int_arr = malloc(length * sizeof(int));
+	if (!int_arr)
+		return (1);
 	i = 0;
 	while (i < length)
 	{
@@ -83,12 +85,12 @@ int	check_list_for_duplicates(t_list *list)
 	}
 	if (check_array_for_duplicates(int_arr, length))
 	{
-		free (int_arr);
+		free(int_arr);
 		return (1);
 	}
 	else
 	{
-		free (int_arr);
+		free(int_arr);
 		return (0);
 	}
 }

@@ -6,18 +6,15 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 14:04:39 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:16:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// TODO STDERR??
 /* 1. create indices for the list starting at 1
-2. set variable n (median of the stack)
-3. chunk sort
-4. push all elems to b (pb)
-5. intelligent push backs from b to a */
+2. chunk sort - push elements to b
+3. intelligent push backs from b to a */
 int	main(int argc, char **args)
 {
 	t_list	*stack_a;
@@ -26,15 +23,15 @@ int	main(int argc, char **args)
 	if (argc == 1)
 		return (-1);
 	if (argc < 1 || !args)
-		return (ft_putstr_fd("Error\n", 1), -1);
+		return (ft_putstr_fd("Error\n", 2), -1);
 	if (!check_input(args))
-		return (ft_putstr_fd("Error\n", 1), -1);
+		return (ft_putstr_fd("Error\n", 2), -1);
 	stack_a = NULL;
 	stack_b = NULL;
 	if (!init_stack_a(&stack_a, args))
-		return (ft_putstr_fd("Error\n", 1), -1);
+		return (ft_putstr_fd("Error\n", 2), -1);
 	if (!init_indices(&stack_a))
-		return (ft_putstr_fd("Error\n", 1), -1);
+		return (ft_putstr_fd("Error\n", 2), -1);
 	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
 	push_stuff_back_to_a(&stack_a, &stack_b);
 	free_stack(&stack_a);
