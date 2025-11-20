@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   indexing_stuff.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:54:52 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 13:50:21 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:03:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

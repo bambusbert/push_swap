@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:08:42 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 13:51:08 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:04:13 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_checked.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:16:08 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 12:15:18 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:03:45 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

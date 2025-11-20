@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:04:31 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 12:18:52 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:04:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	check_input(char **args)
 	return (1);
 }
 
-// TODO include check if numbers are too small or too big
 int	check_single_input(char *str)
 {
 	int		minus;

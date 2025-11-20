@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 13:48:53 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:04:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ void	sort_three_or_less(t_list **stack_a)
 		return ;
 	mid = 0;
 	btm = 0;
-	// TODO failguards
 	top = ((t_node *)((*stack_a)->content))->index;
 	if ((*stack_a)->next)
 		mid = ((t_node *)((*stack_a)->next->content))->index;
