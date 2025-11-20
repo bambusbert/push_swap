@@ -6,10 +6,12 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 15:16:49 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:48:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//TODO check if the input is already a sorted list. if yes, display no instructions at all
+//TODO hardcoded version for small number of input parameters (2-5)
 #include "push_swap.h"
 
 /* 1. create indices for the list starting at 1
