@@ -6,19 +6,19 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:08:42 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/18 15:45:26 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:51:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void reverse_rotate(t_list **list)
+void	reverse_rotate(t_list **list)
 {
-	t_list *last_node;
-	t_list *second_to_last_node;
+	t_list	*last_node;
+	t_list	*second_to_last_node;
 
-    if (!list || !(*list) || !(*list)->next)
-		return;
+	if (!list || !(*list) || !(*list)->next)
+		return ;
 	second_to_last_node = *list;
 	while (second_to_last_node->next->next != NULL)
 	{

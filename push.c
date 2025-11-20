@@ -6,13 +6,12 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:05:46 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/19 16:39:04 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:51:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// take the first element of src and puts it in the beginning (on top) of dest
 void	push(t_list **dest, t_list **src)
 {
 	t_list	*node_to_move;
@@ -20,8 +19,8 @@ void	push(t_list **dest, t_list **src)
 	if (!src || !(*src))
 		return ;
 	node_to_move = *src;
-    *src = (*src)->next;
-    ft_lstadd_front(dest, node_to_move);
+	*src = (*src)->next;
+	ft_lstadd_front(dest, node_to_move);
 }
 
 void	pa(t_list **list_a, t_list **list_b)

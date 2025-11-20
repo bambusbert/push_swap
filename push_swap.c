@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 13:34:33 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:48:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,168 +33,12 @@ int	main(int argc, char **args)
 	stack_b = NULL;
 	if (!init_stack_a(&stack_a, args))
 		return (ft_putstr_fd("Error\n", 1), -1);
-	init_indices(&stack_a);
+	if (!init_indices(&stack_a))
+		return (ft_putstr_fd("Error\n", 1), -1);
 	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
-	push_stuff_to_b(&stack_a, &stack_b);
 	push_stuff_back_to_a(&stack_a, &stack_b);
-	free_lists(&stack_a, &stack_b);
-}
-
-/* 	a. find element with the highest index
-	b. find cheapest way to push that element to the top of b (either rb or rrb)
-	c. execute either rb or rrb until that element is at the top of b
-	d. push that element to a (pa)
-	e. repeat from a until stack b is empty */
-void	push_stuff_back_to_a(t_list **stack_a, t_list **stack_b)
-{
-	t_list	*elem_biggest_index;
-
-	while (*stack_b)
-	{
-		elem_biggest_index = find_elem_with_highest_index(*stack_b);
-		find_direction_and_rotate(stack_b, elem_biggest_index);
-		pa(stack_a, stack_b);
-	}
-}
-
-// returns 1 if the element is in the top half and 2 if the element is in the bottom half
-void	find_direction_and_rotate(t_list **stack_b, t_list *elem_biggest_index)
-{
-	size_t	length;
-	size_t	counter;
-	size_t	bottom;
-	t_list	*cur;
-
-	length = count_nodes(*stack_b);
-	counter = 0;
-	cur = *stack_b;
-	while (cur != elem_biggest_index)
-	{
-		cur = cur->next;
-		counter++;
-	}
-	bottom = length - counter;
-	if (counter <= bottom)
-		rotation_manager(stack_b, counter, 2);
-	else
-		rotation_manager(stack_b, bottom, 1);
-}
-
-void	rotation_manager(t_list **stack_b, int count, int direction)
-{
-	while (count > 0)
-	{
-		if (direction == 2)
-			rb(stack_b);
-		else if (direction == 1)
-			rrb(stack_b);
-		count--;
-	}
-}
-
-t_list	*find_elem_with_highest_index(t_list *stack_b)
-{
-	int		max;
-	t_list	*p_max;
-
-	if (!stack_b)
-		return (NULL);
-	max = 0;
-	p_max = NULL;
-	while (stack_b)
-	{
-		if (((t_node *)stack_b->content)->index > max)
-		{
-			max = ((t_node *)stack_b->content)->index;
-			p_max = stack_b;
-		}
-		if (stack_b->next)
-			stack_b = stack_b->next;
-		else
-			break ;
-	}
-	return (p_max);
-}
-
-// pushes all elements from a to b
-void	push_stuff_to_b(t_list **stack_a, t_list **stack_b)
-{
-	int	nodes;
-
-	nodes = count_nodes(*stack_a);
-	while (nodes > 0)
-	{
-		pb(stack_a, stack_b);
-		nodes--;
-	}
-}
-
-void	chunk_sort(t_list **stack_a, t_list **stack_b, int size_stack_a)
-{
-	t_chunk_info	chunk;
-	int				idx;
-
-	init_chunk_info(&chunk, size_stack_a);
-	while (1)
-	{
-		if (!*stack_a)
-			break ;
-		chunk.cur_lower_limit = chunk.size * (chunk.current_chunk - 1) + 1;
-		chunk.cur_upper_limit = chunk.cur_lower_limit + chunk.size - 1;
-		idx = ((t_node *)(*stack_a)->content)->index;
-		if (idx >= chunk.cur_lower_limit && idx <= chunk.cur_upper_limit)
-		{
-			pb(stack_a, stack_b);
-			chunk.pushed_count++;
-		}
-		else
-			ra(stack_a);
-		if (chunk.pushed_count >= chunk.size)
-		{
-			chunk.pushed_count = 0;
-			chunk.current_chunk++;
-		}
-	}
-}
-
-void	init_chunk_info(t_chunk_info *chunk, int stack_size)
-{
-	chunk->total_chunks = calculate_amount_of_chunks(stack_size);
-	if (chunk->total_chunks > 0)
-		chunk->size = stack_size / chunk->total_chunks;
-	else
-		chunk->size = stack_size;
-	chunk->current_chunk = 1;
-	chunk->pushed_count = 0;
-}
-
-// for 500 numbers 12-14 is most efficient
-// for 100 numbers 4-6 is most efficient
-int	calculate_amount_of_chunks(int size_stack)
-{
-	if (size_stack <= 0)
-		return (0);
-	if (size_stack >= 1 && size_stack <= 9)
-		return (1);
-	if (size_stack >= 10 && size_stack <= 19)
-		return (2);
-	if (size_stack >= 20 && size_stack <= 49)
-		return (3);
-	if (size_stack >= 50 && size_stack <= 99)
-		return (5);
-	if (size_stack >= 100 && size_stack <= 199)
-		return (6);
-	if (size_stack >= 200 && size_stack <= 299)
-		return (8);
-	if (size_stack >= 300 && size_stack <= 499)
-		return (10);
-	if (size_stack >= 500 && size_stack <= 699)
-		return (12);
-	if (size_stack >= 700 && size_stack <= 999)
-		return (14);
-	if (size_stack >= 700 && size_stack <= 999)
-		return (14);
-	return (16);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 }
 
 // returns 0 if any duplicates are found
@@ -241,12 +85,6 @@ t_list	*create_new_list_elem(int value)
 	return (new_list_elem);
 }
 
-void	free_lists(t_list **stack_a, t_list **stack_b)
-{
-	free_stack(stack_a);
-	free_stack(stack_b);
-}
-
 void	free_stack(t_list **stack)
 {
 	t_list	*current_node;
@@ -267,7 +105,8 @@ void	free_stack(t_list **stack)
 
 /*
 
-// this function splits stack a in half. if an element is smaller than N/2 it will be pushed
+// this function splits stack a in half. if an element is smaller 
+// than N/2 it will be pushed
 // to stack_b. otherwise it will be put at the end of stack a (ra)
 // THIS IS DEPRECATED now i am using chunk sort instead of that
 void	split_stacks(t_list **stack_a, t_list **stack_b, int n)

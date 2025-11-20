@@ -6,12 +6,12 @@
 /*   By: slambert <slambert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 13:32:04 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:54:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP
-# define PUSH_SWAP
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <limits.h>
 # include <stdlib.h>
@@ -55,7 +55,7 @@ void				reverse_rotate(t_list **list);
 void				rra(t_list **list);
 void				rrb(t_list **list);
 void				rrr(t_list **list_a, t_list **list_b);
-void				init_indices(t_list **list);
+int					init_indices(t_list **list);
 size_t				count_nodes(t_list *list);
 void				bubble_sort_array(t_node **node_array, size_t size);
 void				fill_out_indices(t_node **node_array, size_t size);
@@ -83,16 +83,8 @@ t_list				*ft_lstlast(t_list *lst);
 int					ft_atoi_checked(const char *nptr, int *result);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 size_t				ft_strlen(const char *str);
-void				free_lists(t_list **stack_a, t_list **stack_b);
 void				free_stack(t_list **stack);
 t_list				*create_new_list_elem(int value);
 void				init_chunk_info(t_chunk_info *chunk, int stack_size);
-
-/*
-void				split_stacks(t_list **stack_a, t_list **stack_b, int n);
-void				sort_three_or_less(t_list **stack_a);
-void				print_lists(t_list *list_a, t_list *list_b);
-void				print_lists_index(t_list *list_a, t_list *list_b);
-*/
 
 #endif
