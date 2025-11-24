@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/24 14:15:45 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:23:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	sort_four(t_list **stack_a, t_list **stack_b)
 	t_list* smallest_elem;
 
 	smallest_elem = find_elem_with_smallest_index(*stack_a);
-	//if (smallest_elem == *stack_a)
-		//do nothing
 	if (smallest_elem == (*stack_a)->next)
 		sa(stack_a);
 	else if (smallest_elem == (*stack_a)->next->next)
@@ -104,13 +102,31 @@ void	sort_four(t_list **stack_a, t_list **stack_b)
 	pb(stack_a, stack_b);
 	sort_three_or_less(stack_a);
 	pa(stack_a, stack_b);
-	
 }
 
 void	sort_five(t_list **stack_a, t_list **stack_b)
 {
-	(void)stack_a;
-	(void)stack_b;
+	t_list* smallest_elem;
+
+	smallest_elem = find_elem_with_smallest_index(*stack_a);
+	if (smallest_elem == (*stack_a)->next)
+		sa(stack_a);
+	else if (smallest_elem == (*stack_a)->next->next)
+	{
+		ra(stack_a);
+		ra(stack_a);
+	}
+	else if (smallest_elem == (*stack_a)->next->next->next)
+	{
+		rra(stack_a);
+		rra(stack_a);
+	}
+	else if (smallest_elem == (*stack_a)->next->next->next->next)
+		rra(stack_a);
+	
+	pb(stack_a, stack_b);
+	sort_four(stack_a, stack_b);
+	pa(stack_a, stack_b);
 }
 
 	// returns 1 if the list is already sorted and 0 if not.
