@@ -6,14 +6,15 @@
 #    By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 13:28:23 by slambert          #+#    #+#              #
-#    Updated: 2025/11/20 14:03:59 by slambert         ###   ########.fr        #
+#    Updated: 2025/11/24 14:34:20 by slambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRC = 	push_swap.c swap.c push.c rotate.c reverse_rotate.c indexing_stuff.c \
-		input_handler.c utils.c ft_atoi_checked.c chunk_sort.c operations.c
+		input_handler.c utils.c ft_atoi_checked.c chunk_sort.c operations.c \
+		sort_five_or_less.c
 
 OBJS = ${SRC:.c=.o}
 
