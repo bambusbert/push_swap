@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/24 11:50:26 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:47:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ int					check_list_for_duplicates(t_list *list);
 int					check_array_for_duplicates(int *int_arr, size_t size);
 void				chunk_sort(t_list **stack_a, t_list **stack_b,
 						int size_stack_a);
+void				sort_three_or_less(t_list **stack_a);
+void				sort_four(t_list **stack_a,
+						t_list **stack_b);
+void				sort_five(t_list **stack_a,
+						t_list **stack_b);						
+void				sort_less_than_five_items(t_list **stack_a,
+						t_list **stack_b, size_t size);
 int					calculate_amount_of_chunks(int size_stack);
 
 void				ft_lstadd_front(t_list **lst, t_list *new);

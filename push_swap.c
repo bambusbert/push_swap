@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/24 12:26:52 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:49:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,66 @@ int	main(int argc, char **args)
 		return (ft_putstr_fd("Error\n", 2), -1);
 	if (is_list_already_sorted(stack_a))
 		return (0);
-	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
+	if (count_nodes(stack_a) <= 5)
+		sort_less_than_five_items(&stack_a, &stack_b, count_nodes(stack_a));
+	else
+		chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
 	push_stuff_back_to_a(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 }
 
-// returns 1 if the list is already sorted and 0 if not.
-// if there is only one element, returns 1
-int	is_list_already_sorted(t_list *stack)
+void	sort_less_than_five_items(t_list **stack_a, t_list **stack_b,
+		size_t size)
+{
+	if (size <= 3)
+		sort_three_or_less(stack_a);
+	if (size == 4)
+		sort_four(stack_a, stack_b);
+	if (size == 5)
+		sort_five(stack_a, stack_b);
+}
+
+void	sort_three_or_less(t_list **stack_a)
+{
+	int	top;
+	int	mid;
+	int	btm;
+
+	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
+		return ;
+	mid = 0;
+	btm = 0;
+	top = ((t_node *)((*stack_a)->content))->index;
+	if ((*stack_a)->next)
+		mid = ((t_node *)((*stack_a)->next->content))->index;
+	if ((*stack_a)->next->next)
+		btm = ((t_node *)((*stack_a)->next->next->content))->index;
+	if (top > mid && top > btm)
+		ra(stack_a);
+	else if (mid > top && mid > btm)
+		rra(stack_a);
+	top = ((t_node *)((*stack_a)->content))->index;
+	mid = ((t_node *)((*stack_a)->next->content))->index;
+	if (top > mid)
+		sa(stack_a);
+}
+
+void	sort_four(t_list **stack_a, t_list **stack_b)
+{
+	(void)stack_a;
+	(void)stack_b;
+}
+
+void	sort_five(t_list **stack_a, t_list **stack_b)
+{
+	(void)stack_a;
+	(void)stack_b;
+}
+
+	// returns 1 if the list is already sorted and 0 if not.
+	// if there is only one element, returns 1
+	int is_list_already_sorted(t_list *stack)
 {
 	int	num1;
 	int	num2;
@@ -156,31 +207,6 @@ void	split_stacks(t_list **stack_a, t_list **stack_b, int n)
 		}
 		count_operations++;
 	}
-}
-
-void	sort_three_or_less(t_list **stack_a)
-{
-	int	top;
-	int	mid;
-	int	btm;
-
-	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
-		return ;
-	mid = 0;
-	btm = 0;
-	top = ((t_node *)((*stack_a)->content))->index;
-	if ((*stack_a)->next)
-		mid = ((t_node *)((*stack_a)->next->content))->index;
-	if ((*stack_a)->next->next)
-		btm = ((t_node *)((*stack_a)->next->next->content))->index;
-	if (top > mid && top > btm)
-		ra(stack_a);
-	else if (mid > top && mid > btm)
-		rra(stack_a);
-	top = ((t_node *)((*stack_a)->content))->index;
-	mid = ((t_node *)((*stack_a)->next->content))->index;
-	if (top > mid)
-		sa(stack_a);
 }
 
 void	print_lists(t_list *list_a, t_list *list_b)
