@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:41:23 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 14:03:57 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:57:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,52 @@ void	push_stuff_back_to_a(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-t_list	*find_elem_with_highest_index(t_list *stack_b)
+t_list	*find_elem_with_highest_index(t_list *stack)
 {
 	int		max;
 	t_list	*p_max;
 
-	if (!stack_b)
+	if (!stack)
 		return (NULL);
-	max = 0;
+	max = INT_MIN;
 	p_max = NULL;
-	while (stack_b)
+	while (stack)
 	{
-		if (((t_node *)stack_b->content)->index > max)
+		if (((t_node *)stack->content)->index > max)
 		{
-			max = ((t_node *)stack_b->content)->index;
-			p_max = stack_b;
+			max = ((t_node *)stack->content)->index;
+			p_max = stack;
 		}
-		if (stack_b->next)
-			stack_b = stack_b->next;
+		if (stack->next)
+			stack = stack->next;
 		else
 			break ;
 	}
 	return (p_max);
+}
+
+t_list	*find_elem_with_smallest_index(t_list *stack)
+{
+	int		min;
+	t_list	*p_min;
+
+	if (!stack)
+		return (NULL);
+	min = INT_MAX;
+	p_min = NULL;
+	while (stack)
+	{
+		if (((t_node *)stack->content)->index < min)
+		{
+			min = ((t_node *)stack->content)->index;
+			p_min = stack;
+		}
+		if (stack->next)
+			stack = stack->next;
+		else
+			break ;
+	}
+	return (p_min);
 }
 
 // returns 1 if the element is in the top half

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/24 12:47:01 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:55:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int					init_stack_a(t_list **list, char **args);
 
 void				push_stuff_to_b(t_list **stack_a, t_list **stack_b);
 void				push_stuff_back_to_a(t_list **stack_a, t_list **stack_b);
-t_list				*find_elem_with_highest_index(t_list *stack_b);
+t_list				*find_elem_with_highest_index(t_list *stack);
+t_list				*find_elem_with_smallest_index(t_list *stack);
 void				find_direction_and_rotate(t_list **stack_b,
 						t_list *elem_biggest_index);
 void				rotation_manager(t_list **stack_b, int count,
