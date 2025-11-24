@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:32 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 14:04:07 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:50:26 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ size_t				count_nodes(t_list *list);
 void				bubble_sort_array(t_node **node_array, size_t size);
 void				fill_out_indices(t_node **node_array, size_t size);
 int					init_stack_a(t_list **list, char **args);
-void				init_stack_b_testing(t_list **list);
 
 void				push_stuff_to_b(t_list **stack_a, t_list **stack_b);
 void				push_stuff_back_to_a(t_list **stack_a, t_list **stack_b);
@@ -86,5 +85,6 @@ size_t				ft_strlen(const char *str);
 void				free_stack(t_list **stack);
 t_list				*create_new_list_elem(int value);
 void				init_chunk_info(t_chunk_info *chunk, int stack_size);
+int					is_list_already_sorted(t_list *stack);
 
 #endif

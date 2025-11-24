@@ -6,12 +6,13 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:27:40 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 15:48:54 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:26:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO check if the input is already a sorted list. if yes, display no instructions at all
-//TODO hardcoded version for small number of input parameters (2-5)
+// TODO check if the input is already a sorted list. if yes,
+// display no instructions at all
+// TODO hardcoded version for small number of input parameters (2-5)
 #include "push_swap.h"
 
 /* 1. create indices for the list starting at 1
@@ -34,10 +35,32 @@ int	main(int argc, char **args)
 		return (ft_putstr_fd("Error\n", 2), -1);
 	if (!init_indices(&stack_a))
 		return (ft_putstr_fd("Error\n", 2), -1);
+	if (is_list_already_sorted(stack_a))
+		return (0);
 	chunk_sort(&stack_a, &stack_b, count_nodes(stack_a));
 	push_stuff_back_to_a(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
+}
+
+// returns 1 if the list is already sorted and 0 if not.
+// if there is only one element, returns 1
+int	is_list_already_sorted(t_list *stack)
+{
+	int	num1;
+	int	num2;
+
+	if (stack && !stack->next)
+		return (1);
+	while (stack && stack->next)
+	{
+		num1 = ((t_node *)stack->content)->index;
+		num2 = ((t_node *)stack->next->content)->index;
+		if (num1 > num2)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
 
 // returns 0 if any duplicates are found
@@ -104,7 +127,7 @@ void	free_stack(t_list **stack)
 
 /*
 
-// this function splits stack a in half. if an element is smaller 
+// this function splits stack a in half. if an element is smaller
 // than N/2 it will be pushed
 // to stack_b. otherwise it will be put at the end of stack a (ra)
 // THIS IS DEPRECATED now i am using chunk sort instead of that
