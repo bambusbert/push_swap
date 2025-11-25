@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:16:08 by slambert          #+#    #+#             */
-/*   Updated: 2025/11/20 14:03:45 by slambert         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:26:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	ft_atoi_checked(const char *nptr, int *result)
 			break ;
 		num *= 10;
 		num += nptr[i - 1] - 48;
+		if (num < INT_MIN || num > INT_MAX)
+			return (0);
 	}
 	if (minus == 3)
 		num *= (-1);
-	if (num < INT_MIN || num > INT_MAX)
-		return (0);
 	*result = (int)num;
 	return (1);
 }
@@ -75,50 +75,50 @@ static const char	*shift_whitespace(const char *nptr)
 		i++;
 	return (&nptr[i]);
 }
-/*
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-int	main(void)
-{
-	const char *tests[] = {
-		"42",
-		"   42",
-		"-42",
-		"+42",
-		"2147483647",  // INT_MAX
-		"2147483648",  // INT_MAX + 1
-		"-2147483648", // INT_MIN
-		"   -123abc",
-		"0",
-		"  +0",
-		"  -0",
-		"   ",
-		"--42",
-		"++42",
-		"-+42",
-		"+   -42   ",
-		"+-42 -",
-		"+-42  sda",
-		"+ - 42",
-		" +- 42",
-		"",
-		"     + 415",
-		"+    415",
-		"\t\v\f\r\n \f+\t\v\f\r\n \f1234",
-		"+\t\v\f\r\n \f1234"
-	};
+// #include <limits.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-	int n_tests = sizeof(tests) / sizeof(tests[0]);
+// int	main(void)
+// {
+// 	const char *tests[] = {
+// 		"42",
+// 		"   42",
+// 		"-42",
+// 		"+42",
+// 		"2147483647",  // INT_MAX
+// 		"2147483648",  // INT_MAX + 1
+// 		"-2147483648", // INT_MIN
+// 		"   -123abc",
+// 		"0",
+// 		"  +0",
+// 		"  -0",
+// 		"   ",
+// 		"--42",
+// 		"++42",
+// 		"-+42",
+// 		"+   -42   ",
+// 		"+-42 -",
+// 		"+-42  sda",
+// 		"+ - 42",
+// 		" +- 42",
+// 		"",
+// 		"     + 415",
+// 		"+    415",
+// 		"\t\v\f\r\n \f+\t\v\f\r\n \f1234",
+// 		"+\t\v\f\r\n \f1234"
+// 	};
 
-	for (int i = 0; i < n_tests; i++)
-	{
-		int ft = ft_atoi(tests[i]);
-		int og = atoi(tests[i]);
-		printf("Test %-20s | ft_atoi: %20d | atoi: %20d | %s\n", tests[i], ft,
-			og, (ft == og ? "PASS" : "FAIL"));
-	}
+// 	int n_tests = sizeof(tests) / sizeof(tests[0]);
 
-	return (0);
-} */
+// 	for (int i = 0; i < n_tests; i++)
+// 	{
+// 		int ft = ft_atoi(tests[i]);
+// 		int og = atoi(tests[i]);
+// 		printf("Test %-20s | ft_atoi: %20d | atoi: %20d | %s\n", tests[i], ft,
+// 			og, (ft == og ? "PASS" : "FAIL"));
+// 	}
+
+// 	return (0);
+// }
